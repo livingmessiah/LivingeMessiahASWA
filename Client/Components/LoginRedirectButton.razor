@@ -1,0 +1,31 @@
+﻿@using Client.Enums
+@inject NavigationManager? NavigationManager
+
+@* <NotAuthorized> *@
+
+<div class="card border-warning my-5">
+	<div class="card-header">Not Authorized</div>
+	<div class="card-body">
+		<h5 class="">To view <b>@PageTitleToView</b> you need to be logged in.</h5>
+		
+	@* <LoginRedirectButton ReturnUrl="@Page.Dashboard.Index" /> *@
+
+		<button @onclick="@(() => RedirectToLoginClick())"
+						type="button" class="btn-primary btn-sm">
+			Login <i class='fas fa-sign-in-alt'></i>
+		</button>
+
+	</div>
+</div>
+
+@* </NotAuthorized> *@
+
+@code {
+	[Parameter, EditorRequired] public string? ReturnUrl { get; set; }
+	[Parameter, EditorRequired] public string? PageTitleToView { get; set; }
+
+	void RedirectToLoginClick()
+	{
+		NavigationManager!.NavigateTo($"{NavAccount.Login}?returnUrl={ReturnUrl}", true);
+	}
+}

@@ -1,0 +1,27 @@
+﻿@page "/cancel_donation.html"
+@page "/cancel_donation"
+
+<PageHeader PageEnum="Client.Enums.Nav.DonateReplyCancel" />
+
+<div id="content">
+	<div class="post">
+		<h2 class="title">We're sorry you had a problem</h2><br />
+		<div class="entry">
+			<p>
+				It appears that your donation transaction was not completed.  If you changed your mind, that's perfectly fine.
+				However, if you ran into some other difficulty, feel free to contact us and we will work to correct the problem.
+				You can email us at @((MarkupString)AnchorEmail).
+			</p>
+			<p>In any case, we appreciate your interest in supporting our ministry.</p>
+			<br>
+		</div>
+	</div>
+</div>
+<!-- end #content -->
+
+@code {
+	protected readonly MarkupString AnchorEmail = 
+		new MarkupString($"<a href='mailto:{@Constants.DonationEmail}'>{@Constants.DonationEmail}</a>");
+}
+
+				

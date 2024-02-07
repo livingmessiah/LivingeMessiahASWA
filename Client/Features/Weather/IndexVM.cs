@@ -1,7 +1,7 @@
 ﻿//namespace Shared;
-namespace Client;
+namespace Client.Features.Weather;
 
-public class WeatherForecast
+public class IndexVM
 {
 	public DateOnly Date { get; set; }
 	public int TemperatureC { get; set; }
@@ -12,13 +12,13 @@ public class WeatherForecast
 	{
 		get
 		{
-			if (this.TemperatureC >= 32)
+			if (TemperatureC >= 32)
 			{
 				return "Hot";
 			}
 			else
 			{
-				if (this.TemperatureC <= 16 )
+				if (TemperatureC <= 16)
 				{
 					return "Freezing";
 				}

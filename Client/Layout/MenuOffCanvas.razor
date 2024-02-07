@@ -1,0 +1,79 @@
+﻿@using Page = Client.Enums.Nav
+
+@inject NavigationManager NavigationManager
+
+<nav class="navbar @navbar_bg fixed-top">
+	<div class="container-fluid">
+		<HomeButton />
+
+		<form class="d-flex" role="search">
+			<input class="form-control me-1"						 
+						 type="search" placeholder="Search NOT WORKING!" aria-label="Search">
+			<button class="btn btn-outline-success btn-sm" type="submit">
+				<i class='fas fa-search'></i>
+			</button>
+		</form>
+
+		<button class="navbar-toggler"
+						@onclick="ToggleNavMenu" type="button"
+						data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+						aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="offcanvas offcanvas-end" tabindex="-1"
+				 id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+			<div class="offcanvas-header">
+
+				<h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+
+				<button type="button" class="btn-close"
+								data-bs-dismiss="offcanvas" aria-label="Close">
+				</button>
+			</div>
+
+			<div class="offcanvas-body @NavMenuCssClass ">
+				<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+					<li class="nav-item">
+						<a class="nav-link" href="@Page.Donate.Index"><i class="@Page.Donate.Icon"></i> @Page.Donate.Title</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="@Page.Sitemap.Index"><i class="@Page.Sitemap.Icon"></i> @Page.Sitemap.Title</a>
+					</li>
+@*  *@
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fas fa-ellipsis-h"></i> More
+						</a>
+
+						<ul class="dropdown-menu">
+							<li>
+								<a class="nav-link @active" href="@Page.Weather.Index"><i class="@Page.Weather.Icon"></i> @Page.Weather.Title</a>
+							</li>
+						</ul>
+
+					</li>
+
+				</ul>
+			</div>
+		</div>
+
+
+		
+	</div>
+</nav>
+
+
+@code {
+	private bool collapseNavMenu = true;
+	private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+	private void ToggleNavMenu()
+	{
+		collapseNavMenu = !collapseNavMenu;
+	}
+
+	const string navbar_bg = "bg-dark-subtle"; // navbar_bg = "bg-body-tertiary"; "bg-primary-subtle"; "bg-primary";  "bg-info-subtle";
+	const string active = " active";
+}

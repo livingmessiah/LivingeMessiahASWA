@@ -1,16 +1,7 @@
-﻿@page "/weather"
-@inject HttpClient Http
+# Example
 
-@using Client;
-@using Page = Client.Enums.Nav
+```html
 @using Status = Client.Enums.LoadingStatusEnum
-
-<PageTitle>@Page.Weather.Title</PageTitle>
-
-	<div class="pb-1 mt-4 mb-2 border-bottom border-info">
-		<h2><i class="@Page.Weather.Icon"></i> @Page.Weather.Title</h2>
-</div>
-
 
 @switch (_status)
 {
@@ -23,54 +14,10 @@
 		break;
 
 	case Status.EmptyList:
-
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Date</th>
-					<th>Temp. (C)</th>
-					<th>Temp. (F)</th>
-					<th>Summary</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
-
 		<p class="text-warning"><em>@_msg</em></p>
 		break;
-
-
 	case Status.ListHasData:
 		<p class="text-success"><em>@_msg</em></p>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Date</th>
-					<th>Temp. (C)</th>
-					<th>Temp. (F)</th>
-					<th>Summary</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var forecast in forecasts!)
-				{
-					<tr>
-						<td>@forecast.Date.ToShortDateString()</td>
-						<td>@forecast.TemperatureC</td>
-						<td>@forecast.TemperatureF</td>
-						<td>@forecast.Summary</td>
-					</tr>
-				}
-			</tbody>
-		</table>
-
 		break;
 
 	case Status.Error:
@@ -82,11 +29,11 @@
 		break;
 
 }
+```
 
+#### `@code` 
 
-
-@code {
-	//private WeatherForecast[]? forecasts;
+```csharp
 	private WeatherForecast[]? forecasts = Array.Empty<WeatherForecast>();
 
 	protected Status _status = Status.Loading;
@@ -94,9 +41,9 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		//forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
 		try
 		{
+			//await Task.Delay(500);
 			forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("/api/WeatherForecast") ?? new WeatherForecast[] { };
 			if (forecasts!.Any())
 			{
@@ -116,5 +63,4 @@
 			Console.WriteLine(ex.ToString());
 		}
 	}
-
-}
+```

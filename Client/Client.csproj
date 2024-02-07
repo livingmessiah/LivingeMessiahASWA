@@ -4,7 +4,16 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>6ba0198c-1486-4b0d-9fc4-571a50c6e8b8</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Components\ConfirmDeleteModal_razor.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Components\ConfirmDeleteModal_razor.md" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Ardalis.SmartEnum" Version="8.0.0" />
