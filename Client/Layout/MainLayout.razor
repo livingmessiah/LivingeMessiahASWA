@@ -1,16 +1,49 @@
-﻿@inherits LayoutComponentBase
+﻿@using Client.Layout.Navigation
+@inherits LayoutComponentBase
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+	<header>
+		<nav class="navbar bg-dark-subtle fixed-top">
+			@* <MenuOffCanvas /> *@
+			@* <NavMenu /> *@
+			<div class="container-fluid">
+				<HomeButton />
+				<SearchForm />
+				<ToggleButton CurrentCssClass="@NavMenuCssClass"
+											OnCssClassSelected="ReturnedCssClass" />
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+				<div class="offcanvas-body @NavMenuCssClass ">
+					<AnchorButtons />
+				</div>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+			</div>
+
+		</nav>
+	</header>
+
+	<main>
+		<article class="content mt-5 px-1">
+			@Body
+		</article>
+	</main>
 </div>
+
+<Footer />
+
+<div id="blazor-error-ui">
+	An unhandled error has occurred.
+	<a href="" class="reload">Reload</a>
+	<a class="dismiss">🗙</a>
+</div>
+
+
+@code {
+
+	public string? NavMenuCssClass { get; set; } = "collapse";
+	private void ReturnedCssClass(string filter)
+	{
+		//Logger!.LogDebug("...inside {Class}!{Method}; filter: {Filter}", nameof(Index), nameof(ReturnedFilter), filter);
+		NavMenuCssClass = filter;
+		//Logger!.LogDebug("......Calling {Method} CurrentFilter: {CurrentFilter}", nameof(StateHasChanged), CurrentFilter);
+		StateHasChanged();
+	}
+}

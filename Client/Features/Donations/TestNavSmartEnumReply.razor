@@ -1,0 +1,16 @@
+﻿@using Client.Enums
+
+<h4 class="mb-0">Reply</h4>
+<ul class="list-inline ms-3">
+	@foreach (var item in Nav.List.ToList()
+	.Where(w => w.IsPartOfList(PageListType.Reply))
+	.OrderBy(o => o.Sort))
+	{
+		<li class="list-inline-item"> @item.Name [@item.Value], </li>
+	}
+</ul>
+
+
+@code {
+
+}

@@ -1,0 +1,56 @@
+﻿@page "/weather"
+@inject HttpClient Http
+
+<PageHeader PageEnum="Client.Enums.Nav.Weather" />
+
+<div class="mx-2">
+	<LoadingComponent IsLoading="forecasts == null">
+		<TableTemplate Items="forecasts"
+									 TableFooterColor="table-primary"
+									 HeaderCSS="table table-light table-hover">
+			<TableHeader>
+				<th>Date</th>
+				<th>Temp. (C)</th>
+				<th>Temp. (F)</th>
+				<th>Summary</th>
+			</TableHeader>
+
+			<RowTemplate>
+				<td>@context.Date</td>
+				<td>@context.TemperatureC</td>
+				<td>@context.TemperatureF</td>
+				<td>@context.Summary</td>
+			</RowTemplate>
+
+
+			<TableFooter>
+				<th></th>
+				<th></th>
+				<th class="text-end">Total</th>
+				<th class="text-end"><span class="border-bottom border-4 border-primary">TEST</span></th>
+			</TableFooter>
+
+		</TableTemplate>
+
+	</LoadingComponent>
+
+</div>
+
+
+@code {
+	private IndexVM[]? forecasts = Array.Empty<IndexVM>();
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			//await Task.Delay(500);
+			forecasts = await Http.GetFromJsonAsync<IndexVM[]>("/api/WeatherForecast") ?? new IndexVM[] { };
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine(ex.ToString());
+		}
+	}
+
+}

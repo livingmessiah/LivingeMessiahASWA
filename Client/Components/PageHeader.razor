@@ -1,0 +1,26 @@
+﻿<PageTitle>@PageEnum.Title</PageTitle>
+
+<div class="pb-1 mt-4 mb-2 border-bottom border-info">
+	<h2><i class="@PageEnum.Icon"></i> @PageEnum.Title</h2>
+</div>
+
+@code {
+	[Parameter, EditorRequired] public Client.Enums.Nav PageEnum { get; set; } = Client.Enums.Nav.Home;
+
+/*
+ 
+		<h2><span class="text-primary @Page.Donate.Icon mb-3"></span> @Page.Donate.Title</h2>
+
+		Options
+		- Add LMM to PageTitle e.g. LMM|Home
+		- Use border if so, which color
+
+		Related topic
+		- How do I deal with "nested" pages like the cancel and confirm of donation
+		- 
+
+					<PageTitle>@Page.Weather.Title</PageTitle>
+					<h2><i class="@Page.Weather.Icon"></i> @Page.Weather.Title</h2>
+			@using Page = Client.Enums.Nav
+	*/
+}
