@@ -1,7 +1,7 @@
 ﻿@using Page = Client.Enums.Nav
 
-<div class="d-sm-none">
-	<a class="navbar-brand nav-link @textColor" title="<576px Xs" href="@Page.Home.Index">
+<div class="d-sm-none px-0 mx-0">
+	<a class="navbar-brand nav-link" title="<576px Xs" href="@Page.Home.Index">
 		<i class="@Page.Home.Icon"></i> <b>@textContent</b>
 	</a>
 </div>
@@ -9,31 +9,30 @@
 
 @*Page.Home.Acronym*@
 <div class="d-none d-sm-block d-md-none d-lg-none d-xl-none">
-	<a class="navbar-brand nav-link  @textColor" title="≥576px Sm" href="@Page.Home.Index">
+	<a class="navbar-brand nav-link " title="≥576px Sm" href="@Page.Home.Index">
 		<i class="@Page.Home.Icon"></i> <sup><b>@textContent</b></sup>
 	</a>
 </div>
 
 <div class="d-none d-md-block d-lg-none d-xl-none">
-	<a class="navbar-brand nav-link  @textColor" title="≥768px Md" href="@Page.Home.Index">
+	<a class="navbar-brand nav-link " title="≥768px Md" href="@Page.Home.Index">
 		<i class="@Page.Home.Icon"></i> <b>@textContent</b>
 	</a>
 </div>
 
 <div class="d-none d-lg-block d-xl-none">
-	<a class="navbar-brand nav-link  @textColor" title="≥992px Lg" href="@Page.Home.Index">
+	<a class="navbar-brand nav-link " title="≥992px Lg" href="@Page.Home.Index">
 		<i class="@Page.Home.Icon"></i> <b>@textContent</b>
 	</a>
 </div>
 
 <div class="d-none d-xl-block">
-	<a class="navbar-brand nav-link  @textColor" title="≥1200px Xl" href="@Page.Home.Index">
+	<a class="navbar-brand nav-link " title="≥1200px Xl" href="@Page.Home.Index">
 		<i class="@Page.Home.Icon"></i> <b>@textContent</b>
 	</a>
 </div>
 
 
 @code {
-	const string textColor = ""; // " text-danger";
 	public string textContent { get; set; } = "";  // Page.Home.Title;
 }
