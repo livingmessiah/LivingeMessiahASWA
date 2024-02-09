@@ -3,7 +3,19 @@ namespace Client.Enums;
 
 public abstract class NavAccount : SmartEnum<NavAccount>
 {
+	/*
+	
+	
+	<a href="/.auth/login/aad">Login Entra</a>
+	 <a href="/.auth/login/github">Login GitHub</a>
 
+	<a href="/.auth/login/github?post_login_redirect_uri=https://zealous-water.azurestaticapps.net/success">Login</a>
+
+	<a href="/.auth/logout">Log out</a>
+
+	<a href="/.auth/logout?post_logout_redirect_uri=https://zealous-water.azurestaticapps.net/success">Log out Redirect</a>
+
+	*/
 	#region Id's
 	private static class Id
 	{
