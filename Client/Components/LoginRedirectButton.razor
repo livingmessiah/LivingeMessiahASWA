@@ -26,6 +26,6 @@
 
 	void RedirectToLoginClick()
 	{
-		NavigationManager!.NavigateTo($"{NavAccount.Login}?returnUrl={ReturnUrl}", true);
+		NavigationManager!.NavigateTo($"{NavAccount.Login}?returnUrl={ReturnUrl!}", true);
 	}
 }

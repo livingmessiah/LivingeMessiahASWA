@@ -9,18 +9,16 @@
 			<a class="nav-link" href="@item.Index"><i class="@item.Icon"></i> @item.Title</a>
 		</li>
 	}
+
+	<li class="nav-item">
+		<a class="nav-link" href="/.auth/login/github">
+			<i class="@Client.Enums.NavAccount.Login.Icon"></i> @Client.Enums.NavAccount.Login.Title
+		</a>
+	</li>
+
 </ul>
 
 
-
 @code {
-	// protected void OnClickFilter(Nav nav)
-	// {
-	// 	OnFilterSelected.InvokeAsync(nav);
-	// }
-
-	// @ActiveFilter(item)
-	//			<a @onclick="@(() => OnClickFilter(item))" title="@item.Title" class="nav-link ">	<small>@item.Title</small> </a>
-	//const string active = " active"; <a class="nav-link @active"
 
 }
