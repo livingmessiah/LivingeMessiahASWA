@@ -9,18 +9,19 @@
 			@* <NavMenu /> *@
 
 			<div class="container-fluid">
-				<HomeButton />
-				<SearchForm />
-
-				<button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-					<span class="navbar-toggler-icon"></span>
+					<HomeButton />
+					<SearchForm />
+				<button title="Navigation menu" class="navbar-toggler px-0" @onclick="ToggleNavMenu">
+					<span class="navbar-toggler-icon ms-0"></span>
 				</button>
 				<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
 					<div class="offcanvas-body @NavMenuCssClass ">
 						<AnchorButtons />
 					</div>
 				</div>
+			
 			</div>
+		
 		</nav>
 
 	</header>
