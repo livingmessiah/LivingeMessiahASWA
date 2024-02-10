@@ -1,5 +1,11 @@
 {
+	"trailingSlash": "auto",
+	"routes": [
+		{
+			"route": "/logout",
+			"redirect": "/.auth/logout"
+		}
+	],
 	"navigationFallback": {
-		"rewrite": "/index.html"
-	}
-}
+		"rewrite": "index.html"
+	}}

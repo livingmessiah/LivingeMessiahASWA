@@ -1,4 +1,5 @@
 ﻿using Ardalis.SmartEnum;
+using Client.Features;
 
 namespace Client.Enums;
 
@@ -23,9 +24,10 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int Donate = 3;
 		internal const int Location = 4;
 		internal const int Sitemap = 5;
-		internal const int Weather = 6;
-		internal const int DonateReplyConfirm = 7;
-		internal const int DonateReplyCancel = 8;
+		internal const int Contact = 6;
+		internal const int Weather = 7;
+		internal const int DonateReplyConfirm = 8;
+		internal const int DonateReplyCancel = 9;
 	}
 	#endregion
 
@@ -35,6 +37,7 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav Donate = new DonateSE();
 	public static readonly Nav Location = new LocationSE();
 	public static readonly Nav Sitemap = new SitemapSE();
+	public static readonly Nav Contact = new ContactSE();
 	public static readonly Nav Weather = new WeatherSE();
 	public static readonly Nav DonateReplyConfirm = new DonateReplyConfirmSE();
 	public static readonly Nav DonateReplyCancel = new DonateReplyCancelSE();
@@ -109,6 +112,17 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string Icon => "fas fa-sitemap";
 		public override int Sort => Id.Sitemap;
 		public override PageListType PageListType => PageListType.Footer | PageListType.Layout;
+		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+	}
+
+	private sealed class ContactSE : Nav
+	{
+		public ContactSE() : base($"{nameof(Id.Contact)}", Id.Contact) { }
+		public override string Index => "/Contact";
+		public override string Title => "Contact";
+		public override string Icon => "far fa-comment-dots"; 
+		public override int Sort => Id.Contact;
+		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout | PageListType.Footer;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 	}
 

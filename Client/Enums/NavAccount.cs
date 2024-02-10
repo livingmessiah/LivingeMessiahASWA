@@ -1,4 +1,6 @@
-﻿using Ardalis.SmartEnum;
+﻿// Ignore Spelling: Nav
+
+using Ardalis.SmartEnum;
 namespace Client.Enums;
 
 public abstract class NavAccount : SmartEnum<NavAccount>

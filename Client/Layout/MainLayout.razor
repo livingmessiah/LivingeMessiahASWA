@@ -9,8 +9,8 @@
 			@* <NavMenu /> *@
 
 			<div class="container-fluid">
-					<HomeButton />
-					<SearchForm />
+				<HomeButton />
+				<SearchForm />
 				<button title="Navigation menu" class="navbar-toggler px-0" @onclick="ToggleNavMenu">
 					<span class="navbar-toggler-icon ms-0"></span>
 				</button>
@@ -19,20 +19,20 @@
 						<AnchorButtons />
 					</div>
 				</div>
-			
+
 			</div>
-		
+
 		</nav>
 
 	</header>
 
 	<main>
 		<article class="content mt-5 px-1">
+			<LoginModal />
 			@Body
 		</article>
 	</main>
 </div>
-
 <Footer />
 
 <div id="blazor-error-ui">
@@ -51,4 +51,4 @@
 		collapseNavMenu = !collapseNavMenu;
 	}
 
-}
+	}
