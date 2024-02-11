@@ -1,12 +1,24 @@
-﻿<form class="d-flex" role="search">
-	<input class="form-control px-1"
-				 type="search" placeholder="Search" aria-label="Search">
-	<button class="btn btn-outline-success btn-sm ms-1" type="submit">
-			<i class="fas fa-search"></i>
-	</button>
-</form>
+﻿@using Blazored.Typeahead
+@using Client.Enums
 
+<div class ="d-flex" role="search">
+<BlazoredTypeahead SearchMethod="SearchNavs"
+									 TValue="Nav"
+									 TItem="Nav"
+									 Value="CurrentNav"
+									 ValueChanged="SelectedResultChanged"
+									 ValueExpression="@(() => CurrentNav)"
+									 EnableDropDown="true"
+									 MaximumSuggestions="40"
+									 MinimumLength="2"
+									 placeholder="Search">
+	<SelectedTemplate Context="mycontext">
+		@mycontext!.Title
+	</SelectedTemplate>
+	<HelpTemplate>Please enter 2+ characters</HelpTemplate>
+	<ResultTemplate Context="mycontext">
+		@mycontext.Title
+	</ResultTemplate>
+</BlazoredTypeahead>
 
-@code {
-	
-}
+</div>
