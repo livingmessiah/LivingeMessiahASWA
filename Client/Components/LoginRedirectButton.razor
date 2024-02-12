@@ -6,9 +6,9 @@
 <div class="card border-warning my-5">
 	<div class="card-header">Not Authorized</div>
 	<div class="card-body">
-		<h5 class="">To view <b>@PageTitleToView</b> you need to be logged in.</h5>
+		<h5 class="">To view <b>@PageTitleToView!</b> you need to be logged in.</h5>
 		
-	@* <LoginRedirectButton ReturnUrl="@Page.Dashboard.Index" /> *@
+	@* <LoginRedirectButton ReturnUrl!="@Page.Dashboard.Index" /> *@
 
 		<button @onclick="@(() => RedirectToLoginClick())"
 						type="button" class="btn-primary btn-sm">
