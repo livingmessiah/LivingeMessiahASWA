@@ -1,17 +1,22 @@
 ﻿@using Client.Layout.Navigation
+@using Client.Enums
 @inherits LayoutComponentBase
+
 <div class="page">
 	<header>
-
-		<nav class="navbar bg-dark-subtle fixed-top">
+		<nav class="navbar bg-warning-subtle fixed-top">
 
 			@* <MenuOffCanvas /> *@
 			@* <NavMenu /> *@
 
 			<div class="container-fluid">
-				<HomeButton />
+
+				<div class="@MediaQuery.SmOrMdOrLgOrXl.DivClass">
+					<HomeButton />
+				</div>
+
 				<SearchForm />
-				<button title="Navigation menu" class="navbar-toggler px-0" @onclick="ToggleNavMenu">
+				<button title="Navigation menu" class="navbar-toggler px-0 text-white" @onclick="ToggleNavMenu">
 					<span class="navbar-toggler-icon ms-0"></span>
 				</button>
 				<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
@@ -27,7 +32,7 @@
 	</header>
 
 	<main>
-		<article class="content mt-5 px-1">
+		<article class="content mt-5 mb-2 px-1">
 			<LoginModal />
 			@Body
 		</article>

@@ -12,7 +12,7 @@
 }
 else
 {
-	<div class="@modalClass" style="display:@(modalOpen?"block":"none");">
+	<div class="@modalClass!" style="display:@(modalOpen?"block":"none");">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header bg-light">
@@ -28,8 +28,8 @@ else
 					<div class="d-grid gap-1 d-sm-block">
 						@foreach (var item in Enums.ThirdPartyLogin.List.OrderBy(o => o.Value))
 						{
-							<a id="@item.Name" href="@($"{item.Href}?post_login_redirect_uri={currentUrl}")"
-								 class="@item.ButtonCss @buttonSize text-white" title="@($"{item.Href}?post_login_redirect_uri={currentUrl}")">
+							<a id="@item.Name" href="@($"{item.Href}?post_login_redirect_uri={currentUrl!}")"
+								 class="@item.ButtonCss! @buttonSize! text-white" title="@($"{item.Href}?post_login_redirect_uri={currentUrl!}")">
 								<i class="@item.Icon @fontSize" aria-hidden="true">&nbsp;@item.Title</i>
 							</a>
 						}
@@ -49,13 +49,13 @@ else
 
 @code {
 
-	const string fontSize = ""; //"fa-fw fa-2x";
-	const string buttonSize = "btn-md"; //"btn-sm";
+	const string? fontSize = ""; //"fa-fw fa-2x";
+	const string? buttonSize = "btn-md"; //"btn-sm";
 	
 	private string? currentUrl;
 
 	bool modalOpen = false;
-	string modalClass = "modal";
+	string? modalClass = "modal";
 	bool ModalIsNotShownToggle = true;
 
 	void ShowModal()

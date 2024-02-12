@@ -1,4 +1,6 @@
-﻿using Ardalis.SmartEnum;
+﻿
+
+using Ardalis.SmartEnum;
 using Client.Features;
 using System.Globalization;
 
@@ -29,8 +31,6 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int Weather = 7;
 		internal const int DonateReplyConfirm = 8;
 		internal const int DonateReplyCancel = 9;
-		internal const int Empty = 10;
-		internal const int Articles = 25;
 		internal const int BibleSearch = 23;
 		internal const int BiblicalPermaculture = 29;
 		internal const int Calendar = 12;
@@ -43,7 +43,7 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int IntroductionAndWelcome = 11;
 		internal const int Leadership = 22;
 		internal const int Mishpocha = 31;
-		internal const int Feast = 28;
+		internal const int Feasts = 28;
 		internal const int Parasha = 20;
 		internal const int ParashaArchive = 21;
 		internal const int WindmillRanch = 13;
@@ -53,6 +53,44 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int Store = 24;
 		internal const int TorahTuesday = 18;
 		internal const int UpcomingEvents = 15;
+
+		internal const int BloodMoons = 34;   //far fa-moon
+		internal const int Planner = 35;   //far fa-map
+		internal const int PlannerV2 = 36;   //fas fa-bread-slice  		public const string Title = "Feast Planner";  
+		internal const int LunarMonthV2 = 37;   //fas fa-cloud-moon
+		internal const int SpecialEvents = 38;   //far fa-clock   //Title = "Special Events";
+
+
+		internal const int Articles = 40;  // /Articles/Pesach
+		internal const int Pesach = 41;   //fas fa-door-open  /Articles/Pesach // TitleEnglish = "Passover";
+		internal const int MakingChallahBread = 42;   //fas fa-bread-slice  /Articles/MakingChallahBread // Title = "Challah Bread";
+		internal const int Prepared = 43;   //fas fa-band-aid  /Articles/Prepared // Title = "Preparing";
+
+		internal const int PsalmsAndProverbs = 45;   //fab fa-readme Title = "Upcoming Psalms And Proverbs"; Index2 = "/PandP";
+		internal const int Psalms = 46;   //fab fa-readme   //Title = "Psalms";
+
+		/*
+public static class ThankYou
+{
+	public const string TopId = "ThankYouTop";
+	public const string Title = "ThankYou";
+	public const string FragmentId = "ThankYou";
+	public const string Descr = "Thank You !!!";
+}
+		*/
+
+		// Remove?
+		internal const int FeastTable = 50;   //fas fa-glass-cheers
+		internal const int FeastSfSchedule = 51;   //far fa-calendar
+		internal const int BibleBooks = 52;   // fas fa-tachometer-alt Title="Bible Books"
+		internal const int BibleCascadingDDL = 53;   // fas fa-tachometer-alt Title="Bible Cascading Dropdown List"
+		internal const int Grid12Calendar = 54;   // fas fa-grip-horizontal Title="Grid 12 Calendar"
+		internal const int MarkDown = 55; //Index = "/MarkdownTest";   // fab fa-markdown Title="Mark Down"
+		internal const int SyncfusionSfDropDownList = 56; //Index = "/BBCP";   Title = "Bible Book Chapter | Syncfusion DDL"; fas fa-search"
+		internal const int Shavuot = 57; // fab fa-creative-commons-zero
+		internal const int Roles = 58; // fas fa-ruler  Index = "/RolesTest";   Title = "Roles Test";
+		internal const int HealThySelf = 59; // fas fa-heartbeat   Title = "Heal Thy Self!";
+																				 
 	}
 	#endregion
 
@@ -66,7 +104,6 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav Weather = new WeatherSE();
 	public static readonly Nav DonateReplyConfirm = new DonateReplyConfirmSE();
 	public static readonly Nav DonateReplyCancel = new DonateReplyCancelSE();
-	public static readonly Nav Empty = new EmptySE();
 
 	public static readonly Nav IntroductionAndWelcome = new IntroductionAndWelcomeSE();
 	public static readonly Nav Calendar = new CalendarSE();
@@ -85,7 +122,7 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav Articles = new ArticlesSE();
 	public static readonly Nav FurtherStudies = new FurtherStudiesSE();
 	public static readonly Nav ImportantLinks = new ImportantLinksSE();
-	public static readonly Nav Feast = new FeastSE();
+	public static readonly Nav Feast = new FeastsSE();
 	public static readonly Nav BiblicalPermaculture = new BiblicalPermacultureSE();
 	public static readonly Nav SampleCode = new SampleCodeSE();
 	public static readonly Nav Mishpocha = new MishpochaSE();
@@ -209,24 +246,12 @@ public abstract class Nav : SmartEnum<Nav>
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 	}
 
-
-	private sealed class EmptySE : Nav
-	{
-		public EmptySE() : base($"{nameof(Id.Empty)}", Id.Empty) { }
-		public override string Index => "/Empty";
-		public override string Title => "Empty";
-		public override string Icon => "fas fa-battery-empty";
-		public override int Sort => Id.Empty;
-		public override PageListType PageListType => PageListType.SitemapPage;
-		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
-	}
-
 	private sealed class IntroductionAndWelcomeSE : Nav
 	{
 		public IntroductionAndWelcomeSE() : base($"{nameof(Id.IntroductionAndWelcome)}", Id.IntroductionAndWelcome) { }
 		public override string Index => "/IntroductionAndWelcome";
-		public override string Title => "Introduction and Welcome";
-		public override string Icon => "ZZZ";
+		public override string Title => "Welcome";  //  Title2 = "Welcome 😄";  https://github.com/anton-bot/Full-Emoji-List/blob/master/Emoji.cs
+		public override string Icon => "far fa-handshake";
 		public override int Sort => Id.IntroductionAndWelcome;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -237,7 +262,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public CalendarSE() : base($"{nameof(Id.Calendar)}", Id.Calendar) { }
 		public override string Index => "/Calendar";
 		public override string Title => "Calendar";
-		public override string Icon => "ZZZ";
+		public override string Icon => "far fa-calendar-alt";
 		public override int Sort => Id.Calendar;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -246,9 +271,9 @@ public abstract class Nav : SmartEnum<Nav>
 	private sealed class WindmillRanchSE : Nav
 	{
 		public WindmillRanchSE() : base($"{nameof(Id.WindmillRanch)}", Id.WindmillRanch) { }
-		public override string Index => "/WindmillRanch";
-		public override string Title => "Windmill Ranch";
-		public override string Icon => "ZZZ";
+		public override string Index => "/WindmillRanch/Permaculture";
+		public override string Title => "Biblical Permaculture";  // Windmill Ranch
+		public override string Icon => "fas fa-tractor";
 		public override int Sort => Id.WindmillRanch;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -259,18 +284,31 @@ public abstract class Nav : SmartEnum<Nav>
 		public ShabbatServiceSE() : base($"{nameof(Id.ShabbatService)}", Id.ShabbatService) { }
 		public override string Index => "/ShabbatService";
 		public override string Title => "Shabbat Service";
-		public override string Icon => "ZZZ";
+		public override string Icon => "far fa-hand-spock";
 		public override int Sort => Id.ShabbatService;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 	}
+
+	/*
+		public static class LiveFeed
+	{
+		public const string IndepthStudyTopId = "IndepthStudyTop";  // ToDo: Anchor Fragment's don't work in Blazor 3.1
+		public const string IndepthStudyTitle = "In-depth Study";
+		public const string ShabbatServiceTopId = "ShabbatServiceTop"; // ToDo: Anchor Fragment's don't work in Blazor 3.1
+		public const string ShabbatServiceTitle = "Main Shabbat Service";
+		public const string ShabbatServiceEspTopId = "ShabbatServiceEspTop"; // ToDo: Anchor Fragment's don't work in Blazor 3.1
+		public const string ShabbatServiceEspTitle = "Servicio principal de Shabat";
+	}
+	*/
+
 
 	private sealed class UpcomingEventsSE : Nav
 	{
 		public UpcomingEventsSE() : base($"{nameof(Id.UpcomingEvents)}", Id.UpcomingEvents) { }
 		public override string Index => "/UpcomingEvents";
 		public override string Title => "Upcoming Events";
-		public override string Icon => "ZZZ";
+		public override string Icon => "far fa-clock";
 		public override int Sort => Id.UpcomingEvents;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -281,7 +319,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public HeavensDeclareSE() : base($"{nameof(Id.HeavensDeclare)}", Id.HeavensDeclare) { }
 		public override string Index => "/HeavensDeclare";
 		public override string Title => "Heavens Declare";
-		public override string Icon => "ZZZ";
+		public override string Icon => "fas fa-cloud-moon";
 		public override int Sort => Id.HeavensDeclare;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -291,8 +329,8 @@ public abstract class Nav : SmartEnum<Nav>
 	{
 		public PodcastSE() : base($"{nameof(Id.Podcast)}", Id.Podcast) { }
 		public override string Index => "/Podcast";
-		public override string Title => "Podcast";
-		public override string Icon => "ZZZ";
+		public override string Title => "Podcast";  // Title2 => "Podcast";
+		public override string Icon => "fas fa-podcast";
 		public override int Sort => Id.Podcast;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -303,7 +341,8 @@ public abstract class Nav : SmartEnum<Nav>
 		public TorahTuesdaySE() : base($"{nameof(Id.TorahTuesday)}", Id.TorahTuesday) { }
 		public override string Index => "/TorahTuesday";
 		public override string Title => "Torah Tuesday";
-		public override string Icon => "ZZZ";
+		//public override string Title2 => "Torah Tuesday Study";
+		public override string Icon => "far fa-clock";
 		public override int Sort => Id.TorahTuesday;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -314,7 +353,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public IndepthStudySE() : base($"{nameof(Id.IndepthStudy)}", Id.IndepthStudy) { }
 		public override string Index => "/IndepthStudy";
 		public override string Title => "In-depth Study";
-		public override string Icon => "ZZZ";
+		public override string Icon => "fas fa-graduation-cap";
 		public override int Sort => Id.IndepthStudy;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -325,7 +364,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public ParashaSE() : base($"{nameof(Id.Parasha)}", Id.Parasha) { }
 		public override string Index => "/Parasha";
 		public override string Title => "Parasha";
-		public override string Icon => "ZZZ";
+		public override string Icon => "fas fa-torah";
 		public override int Sort => Id.Parasha;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -336,7 +375,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public ParashaArchiveSE() : base($"{nameof(Id.ParashaArchive)}", Id.ParashaArchive) { }
 		public override string Index => "/ParashaArchive";
 		public override string Title => "Parasha Archive";
-		public override string Icon => "ZZZ";
+		public override string Icon => "fas fa-archive";
 		public override int Sort => Id.ParashaArchive;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -347,18 +386,25 @@ public abstract class Nav : SmartEnum<Nav>
 		public LeadershipSE() : base($"{nameof(Id.Leadership)}", Id.Leadership) { }
 		public override string Index => "/Leadership";
 		public override string Title => "Leadership";
-		public override string Icon => "ZZZ";
+		public override string Icon => "fas fa-user-friends";
 		public override int Sort => Id.Leadership;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 	}
+	/*
+	public static class Fragments
+	{
+		public const string Top = "Top";
+		public const string Leadership = "Leadership";
+	}
+	*/
 
 	private sealed class BibleSearchSE : Nav
 	{
 		public BibleSearchSE() : base($"{nameof(Id.BibleSearch)}", Id.BibleSearch) { }
 		public override string Index => "/BibleSearch";
 		public override string Title => "Bible Search";
-		public override string Icon => "ZZZ";
+		public override string Icon => "fas fa-search";  //fas fa-bible
 		public override int Sort => Id.BibleSearch;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -369,18 +415,28 @@ public abstract class Nav : SmartEnum<Nav>
 		public StoreSE() : base($"{nameof(Id.Store)}", Id.Store) { }
 		public override string Index => "/Store";
 		public override string Title => "Store";
-		public override string Icon => "ZZZ";
+		public override string Icon => "fas fa-shopping-cart";
 		public override int Sort => Id.Store;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 	}
+	/*
+		public static class Items
+		{
+			public const string TitleTShirt = "T-Shirt";
+			public const string IconTShirt = "fas fa-tshirt";
+			public const string TitleCalendar = "Calendar";
+			public const string SubTitleCalendar = "LMM Designed Calendar";
+			public const string IconCalendar = "far fa-calendar-alt";
+		}
+	*/
 
 	private sealed class ArticlesSE : Nav
 	{
 		public ArticlesSE() : base($"{nameof(Id.Articles)}", Id.Articles) { }
 		public override string Index => "/Articles";
 		public override string Title => "Articles";
-		public override string Icon => "ZZZ";
+		public override string Icon => "fas fa-pencil-alt";
 		public override int Sort => Id.Articles;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -391,7 +447,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public FurtherStudiesSE() : base($"{nameof(Id.FurtherStudies)}", Id.FurtherStudies) { }
 		public override string Index => "/FurtherStudies";
 		public override string Title => "Further Studies";
-		public override string Icon => "ZZZ";
+		public override string Icon => "fab fa-leanpub";
 		public override int Sort => Id.FurtherStudies;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -402,19 +458,20 @@ public abstract class Nav : SmartEnum<Nav>
 		public ImportantLinksSE() : base($"{nameof(Id.ImportantLinks)}", Id.ImportantLinks) { }
 		public override string Index => "/ImportantLinks";
 		public override string Title => "Important Links";
-		public override string Icon => "ZZZ";
+		public override string Icon => "fas fa-external-link-square-alt";
 		public override int Sort => Id.ImportantLinks;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 	}
 
-	private sealed class FeastSE : Nav
+	private sealed class FeastsSE : Nav
 	{
-		public FeastSE() : base($"{nameof(Id.Feast)}", Id.Feast) { }
-		public override string Index => "/Feast";
-		public override string Title => "Feast";
-		public override string Icon => "ZZZ";
-		public override int Sort => Id.Feast;
+		public FeastsSE() : base($"{nameof(Id.Feasts)}", Id.Feasts) { }
+		public override string Index => "/Feasts";
+		public override string Title => "Feasts";
+		public override string Icon => "fas fa-pizza-slice"; // fas fa-drumstick-bite"
+		//public override string Descr = "Landing page for Feasts of YHVH";
+		public override int Sort => Id.Feasts;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 	}
@@ -424,7 +481,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public BiblicalPermacultureSE() : base($"{nameof(Id.BiblicalPermaculture)}", Id.BiblicalPermaculture) { }
 		public override string Index => "/BiblicalPermaculture";
 		public override string Title => "Biblical Permaculture";
-		public override string Icon => "ZZZ";
+		public override string Icon => "fas fa-tractor";
 		public override int Sort => Id.BiblicalPermaculture;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -435,7 +492,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public SampleCodeSE() : base($"{nameof(Id.SampleCode)}", Id.SampleCode) { }
 		public override string Index => "/SampleCode";
 		public override string Title => "Sample Code";
-		public override string Icon => "ZZZ";
+		public override string Icon => "fas fa-vial";
 		public override int Sort => Id.SampleCode;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -445,8 +502,8 @@ public abstract class Nav : SmartEnum<Nav>
 	{
 		public MishpochaSE() : base($"{nameof(Id.Mishpocha)}", Id.Mishpocha) { }
 		public override string Index => "/Mishpocha";
-		public override string Title => "Mishpocha";
-		public override string Icon => "ZZZ";
+		public override string Title => "Mishpocha means Family";
+		public override string Icon => "fas fa-ellipsis-h";
 		public override int Sort => Id.Mishpocha;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -457,7 +514,9 @@ public abstract class Nav : SmartEnum<Nav>
 		public CommunitySE() : base($"{nameof(Id.Community)}", Id.Community) { }
 		public override string Index => "/Community";
 		public override string Title => "Community";
-		public override string Icon => "ZZZ";
+		//public override string Descr = "Community Bulletin Board";
+		public override string Icon => "fas fa-chalkboard";
+		//public override string Icon2 => "fas fa-city";
 		public override int Sort => Id.Community;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -468,7 +527,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public GallerySE() : base($"{nameof(Id.Gallery)}", Id.Gallery) { }
 		public override string Index => "/Gallery";
 		public override string Title => "Gallery";
-		public override string Icon => "ZZZ";
+		public override string Icon => "fas fa-image";
 		public override int Sort => Id.Gallery;
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
@@ -479,4 +538,4 @@ public abstract class Nav : SmartEnum<Nav>
 	#endregion
 }
 
-// Ignore Spelling: Nav
+// Ignore Spelling: Nav Permaculture Indepth Mishpocha Parasha Chala Challah Syncfusion QRC Descr tshirt Torah pesach YouTube
