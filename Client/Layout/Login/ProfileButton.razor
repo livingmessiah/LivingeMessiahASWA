@@ -1,0 +1,40 @@
+﻿@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+<div class="">
+	<button class="btn btn-primary btn-xs position-relative p-2"
+					type="button" title="Notification"
+					@onclick="@(e => OnButtonClicked(Notifications))">
+		<i class="@Client.Enums.NavAccount.Profile.Icon"></i>
+		<span class="position-absolute top-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+			@Notifications
+			<span class="visually-hidden">Notification Count</span>
+		</span>
+	</button>
+</div>
+
+@code {
+	protected int Notifications = 0;
+
+	protected override async Task OnInitializedAsync()
+	{
+		
+
+		var s = await localStorage.GetItemAsync<string>("notifications");
+		if (s is not null)
+		{
+			Notifications = int.TryParse(s, out Notifications) ? Notifications : 0;
+		}
+		else
+		{
+			await localStorage.SetItemAsync("notifications", "0");
+		}
+	}
+
+	private async Task OnButtonClicked(int count)
+	{
+		Notifications = count-1;
+		await localStorage.SetItemAsync("notifications", Notifications);
+		StateHasChanged();
+	}
+
+}

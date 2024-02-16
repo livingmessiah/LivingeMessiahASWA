@@ -1,15 +1,15 @@
 ﻿@using Client.Enums
 @using Client.Layout.Navigation
 
-@inject NavigationManager NavigationManager
-
-<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+<ul class="navbar-nav justify-content-end flex-grow-1">
 	@foreach (var item in Nav.List.ToList()
 	.Where(w => w.IsPartOfList(PageListType.Layout))
 	.OrderBy(o => o.Sort))
 	{
 		<li class="nav-item">
-			<a class="nav-link" href="@item.Index"><i class="@item.Icon"></i> @item.Title</a>
+			<a class="nav-link" href="@item.Index">
+				<i class="@item.Icon"></i> @item.Title
+			</a>
 		</li>
 	}
 

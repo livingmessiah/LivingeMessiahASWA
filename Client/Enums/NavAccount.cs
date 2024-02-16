@@ -77,9 +77,9 @@ public abstract class NavAccount : SmartEnum<NavAccount>
 		public ProfileSE() : base($"{nameof(Id.Profile)}", Id.Profile) { }
 		public override string Index => "/account/profile";
 		public override string Title => "Profile";
-		public override string Icon => "fab fa-superpowers";  //fas fa-user
-		//public const string IconVerified = "fas fa-check";
-		//public const string IconNotVerified = "fas fa-question";
+		public override string Icon => "fas fa-user";  //fab fa-superpowers
+																				//public const string IconVerified = "fas fa-check";
+																				//public const string IconNotVerified = "fas fa-question";
 	}
 	#endregion
 

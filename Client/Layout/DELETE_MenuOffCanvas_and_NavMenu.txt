@@ -1,1 +1,0 @@
-when the menu is working satisfactorily these two components should not be needed any more

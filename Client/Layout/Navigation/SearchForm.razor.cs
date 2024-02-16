@@ -12,8 +12,9 @@ public partial class SearchForm
 	private async Task<IEnumerable<Nav>> SearchNavs(string searchText)
 	{
 		return await Task.FromResult(Nav.List
-			.Where(x => x.Title.ToLower().Contains(searchText.ToLower()))
-			.OrderBy(o => o.Value));
+			.Where(x => x.Title.ToLower().Contains(searchText.ToLower()) 
+				&& x.IsPartOfList(PageListType.SitemapPage))
+			.OrderBy(o => o.Name));
 	}
 
 	private void SelectedResultChanged(Nav nav)

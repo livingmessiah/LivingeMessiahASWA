@@ -2,8 +2,8 @@
 @using Client.Enums
 
 <footer class="text-center bg-light text-muted w-100 mt-3">
-
-	<section class="d-flex justify-content-center -2 border-bottom">
+	
+	<div class="d-flex justify-content-center -2 border-bottom">
 
 		@foreach (var item in NavSocialMedia.List.ToList())
 		{
@@ -14,7 +14,6 @@
 
 		&nbsp;&nbsp; &nbsp;&nbsp;
 
-
 		@foreach (var item in Nav.List.ToList()
 			.Where(w => w.IsPartOfList(PageListType.Footer))
 			.OrderBy(o => o.Sort))
@@ -23,8 +22,8 @@
 				<i class="@item.Icon"></i>
 			</a>
 		}
-	</section>
-
+	</div>
+	
 	<img src="/images/footer.jpg" class="img-fluid" />
 </footer>
 
