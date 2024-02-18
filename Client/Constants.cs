@@ -11,6 +11,8 @@ public static class Address
 public static class Meta
 {
 	public const string Title = "Living Messiah Ministries";
+	public const string ShortTitle = "Living Messiah";
+	public const string Acronym = "LMM";
 }
 
 

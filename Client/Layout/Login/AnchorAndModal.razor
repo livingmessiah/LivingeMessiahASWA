@@ -1,14 +1,13 @@
-﻿@using Client.Enums
+﻿@using Client.Layout.Login.Enums
 @inject NavigationManager? NavigationManager
 
 @if (ModalIsNotShownToggle)
 {
-	<div class="top-row">
-		<button type="button" class="btn btn-xs btn-outline-info float-end text-black-50"
-						@onclick="() => ShowModal()">
-			<i class="@Client.Enums.NavAccount.Login.Icon"></i> Login
-		</button>
-	</div>
+	<button type="button" class="btn btn-xs btn-outline-info text-black-50"
+					@onclick="() => ShowModal()">
+		<i class="@Client.Enums.NavAccount.Login.Icon"></i> Login
+	</button>
+
 }
 else
 {
@@ -25,11 +24,11 @@ else
 				</div>
 
 				<div class="modal-body">
-					<div class="d-grid gap-1 d-sm-block">
-						@foreach (var item in Enums.ThirdPartyLogin.List.OrderBy(o => o.Value))
+					<div class="d-flex justify-content-between">
+						@foreach (var item in ThirdPartyLogin.List.OrderBy(o => o.Value))
 						{
 							<a id="@item.Name" href="@($"{item.Href}?post_login_redirect_uri={currentUrl!}")"
-								 class="@item.ButtonCss! @buttonSize! text-white" title="@($"{item.Href}?post_login_redirect_uri={currentUrl!}")">
+								 class="@item.ButtonCss @buttonSize text-white" title="@($"{item.Href}?post_login_redirect_uri={currentUrl!}")">
 								<i class="@item.Icon @fontSize" aria-hidden="true">&nbsp;@item.Title</i>
 							</a>
 						}
@@ -50,8 +49,7 @@ else
 @code {
 
 	const string? fontSize = ""; //"fa-fw fa-2x";
-	const string? buttonSize = "btn-md"; //"btn-sm";
-	
+	const string? buttonSize = "btn-xs"; // ToDo: use this... Client.Layout.Navigation.Anchors.BtnSize.Xs;
 	private string? currentUrl;
 
 	bool modalOpen = false;
