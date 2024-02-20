@@ -1,14 +1,17 @@
 ﻿@using Client.Layout.Navigation
 @using Client.Layout.Login
 @using Client.Enums
+@using Client.Services
 
 @inherits LayoutComponentBase
+@inject ProfileService ProfileService
+@implements IDisposable
 
 <div class="@MediaQuery.Xs.DivClass">
 
 	<div class="d-flex bg-warning-subtle">
 		<div class="p-1">
-			<HomeButton MediaQuery="@MediaQuery.Xs" />
+			<HomeButton MediaQuery="@MediaQuery.Xs" DarkMode="@_preferences.DarkMode" />
 		</div>
 
 		<div class="p-1 flex-grow-1">
@@ -26,7 +29,7 @@
 <div class="@MediaQuery.Sm.DivClass">
 	<div class="d-flex bg-warning-subtle">
 		<div class="p-1">
-			<HomeButton MediaQuery="@MediaQuery.Sm" />
+			<HomeButton MediaQuery="@MediaQuery.Sm" DarkMode="@_preferences.DarkMode" />
 		</div>
 		<div class="p-1 flex-grow-1">
 			<SearchForm />
@@ -40,7 +43,7 @@
 <div class="@MediaQuery.MdOrLgOrXl.DivClass">
 	<div class="d-flex bg-warning-subtle">
 		<div class="p-1">
-			<HomeButton MediaQuery="@MediaQuery.MdOrLgOrXl" />
+			<HomeButton MediaQuery="@MediaQuery.MdOrLgOrXl" DarkMode="@_preferences.DarkMode" />
 		</div>
 		<div class="p-1 flex-grow-1">
 			<SearchForm />
@@ -52,6 +55,10 @@
 </div>
 
 <div class="d-flex justify-content-end mt-1 mx-1">
+	<div class="p-1">
+		<ThemeToggle DarkMode="@_preferences.DarkMode" />
+	</div>
+
 	<ProfileButton />
 	<div class="p-2 fs-6">
 		<AnchorAndModal />
@@ -62,16 +69,26 @@
 	@Body
 </div>
 
-
 <Footer />
 
-
 @code {
-	protected string? cssClass = $"{Anchors.BtnSize.Xs} btn-info";
-		/*
+	private Preferences _preferences = new();
 
-		.Where(w => w.Value == Nav.ShabbatService | w.Value == Nav.UpcomingEvents | w.Value == Nav.Donate | w.Value == Nav.Calendar)
+	protected override async Task OnInitializedAsync()
+	{
+		ProfileService.OnChange += ProfileServiceOnOnChange;
+		_preferences = await ProfileService.GetPreferences();
+	}
 
-		*/
+	private void ProfileServiceOnOnChange(Preferences newPreferences)
+	{
+		_preferences = newPreferences;
+		StateHasChanged();
+	}
+
+	public void Dispose()
+	{
+		ProfileService.OnChange -= ProfileServiceOnOnChange;
+	}
 
 }

@@ -1,0 +1,20 @@
+﻿@using Client.Tests.Enums
+
+<PageTitle>@NavTest!.Title</PageTitle>
+
+	@if (NavTest!.Value != NavTest.Parent)
+{
+	<BreadCrumbs Href="@NavTest.Parent.Index"
+							 ParentTitle="@NavTest.Parent.Title"
+							 Title="@NavTest.Parent.Title"
+							 Icon="@NavTest.Parent.Icon">
+	</BreadCrumbs>
+}
+
+<div class="pb-n1 mt-4 mb-3 border-bottom border-danger">
+	<h2><i class="@NavTest.Icon"></i>&nbsp;&nbsp;@NavTest.Title</h2>
+</div>
+
+@code {
+	[Parameter, EditorRequired] public NavTest? NavTest { get; set; }
+}

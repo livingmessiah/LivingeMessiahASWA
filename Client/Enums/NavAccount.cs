@@ -1,6 +1,4 @@
-﻿// Ignore Spelling: Nav
-
-using Ardalis.SmartEnum;
+﻿using Ardalis.SmartEnum;
 namespace Client.Enums;
 
 public abstract class NavAccount : SmartEnum<NavAccount>
@@ -84,3 +82,5 @@ public abstract class NavAccount : SmartEnum<NavAccount>
 	#endregion
 
 }
+
+// Ignore Spelling: Nav
