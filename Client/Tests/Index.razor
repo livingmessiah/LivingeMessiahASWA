@@ -1,0 +1,30 @@
+﻿@page "/Test"
+
+@using Client.Tests.Enums
+
+<Client.Tests.Components.PageHeader NavTest="NavTest.Parent" />
+
+<div class="h5">
+
+	<ul class="fa-ul">
+		@foreach (var item in NavTest.List.ToList()
+			.Where(w => w.Value != NavTest.Parent)
+			.OrderBy(o => o.Sort))
+		{
+			<li class="py-1">
+
+				<span class="fa-li"><i class="@item.Icon"></i></span>
+				<a href="@item.Index">
+					@item.Title
+				</a>
+
+			</li>
+		}
+	</ul>
+
+</div>
+
+
+@code {
+
+}

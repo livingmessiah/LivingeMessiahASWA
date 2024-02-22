@@ -1,8 +1,4 @@
-﻿
-
-using Ardalis.SmartEnum;
-using Client.Features;
-using System.Globalization;
+﻿using Ardalis.SmartEnum;
 
 namespace Client.Enums;
 
@@ -69,7 +65,9 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int PsalmsAndProverbs = 45;   //fab fa-readme Title = "Upcoming Psalms And Proverbs"; Index2 = "/PandP";
 		internal const int Psalms = 46;   //fab fa-readme   //Title = "Psalms";
 
-		/*
+    
+
+    /*
 public static class ThankYou
 {
 	public const string TopId = "ThankYouTop";
@@ -79,8 +77,8 @@ public static class ThankYou
 }
 		*/
 
-		// Remove?
-		internal const int FeastTable = 50;   //fas fa-glass-cheers
+    // Remove?
+    internal const int FeastTable = 50;   //fas fa-glass-cheers
 		internal const int FeastSfSchedule = 51;   //far fa-calendar
 		internal const int BibleBooks = 52;   // fas fa-tachometer-alt Title="Bible Books"
 		internal const int BibleCascadingDDL = 53;   // fas fa-tachometer-alt Title="Bible Cascading Dropdown List"
@@ -90,8 +88,8 @@ public static class ThankYou
 		internal const int Shavuot = 57; // fab fa-creative-commons-zero
 		internal const int Roles = 58; // fas fa-ruler  Index = "/RolesTest";   Title = "Roles Test";
 		internal const int HealThySelf = 59; // fas fa-heartbeat   Title = "Heal Thy Self!";
-																				 
-	}
+    internal const int TestLocalStorage = 60;   
+  }
 	#endregion
 
 	#region  Declared Public Instances
@@ -130,9 +128,11 @@ public static class ThankYou
 	public static readonly Nav Gallery = new GallerySE();
 
 
-	#endregion
+  public static readonly Nav TestLocalStorage = new TestLocalStorageSE();
 
-	private Nav(string name, int value) : base(name, value)  // Constructor
+  #endregion
+
+  private Nav(string name, int value) : base(name, value)  // Constructor
 	{
 	}
 
@@ -534,8 +534,19 @@ public static class ThankYou
 	}
 
 
+  private sealed class TestLocalStorageSE : Nav
+  {
+    public TestLocalStorageSE() : base($"{nameof(Id.TestLocalStorage)}", Id.TestLocalStorage) { }
+    public override string Index => "/TestLocalStorage";
+    public override string Title => "Test Blazored LocalStorage (sync)";
+    public override string Icon => "fas fa-box-open"; 
+    public override int Sort => Id.TestLocalStorage;
+    public override PageListType PageListType => PageListType.SitemapPage;
+    public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+  }
 
-	#endregion
+
+  #endregion
 }
 
 // Ignore Spelling: Nav Permaculture Indepth Mishpocha Parasha Chala Challah Syncfusion QRC Descr tshirt Torah pesach YouTube

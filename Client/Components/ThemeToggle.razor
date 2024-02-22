@@ -1,0 +1,36 @@
+﻿@using Client.Layout.Navigation
+@using Client.Services
+
+@inject ProfileService ProfileService
+
+@if (IsDarkMode)
+{
+	<button class="btn btn-sm @Anchors.BtnColors.Dark" 
+		@onclick="Toggle" title="Change Dark Mode to Off">
+		DM is On <i class="fas fa-toggle-on"></i>
+	</button>
+}
+else
+{
+	<button class="btn btn-sm @Anchors.BtnColors.Light" 
+		@onclick="Toggle" title="Change Dark Mode to On">
+		DM is Off <i class="fas fa-toggle-off"></i>
+	</button>
+}
+
+@code {
+	[Parameter, EditorRequired] public bool DarkMode { get; set; }
+
+	public bool IsDarkMode { get; set; }
+
+	protected override void OnParametersSet()
+	{
+		IsDarkMode = DarkMode;
+	}
+
+	private void Toggle()
+	{
+		IsDarkMode = !IsDarkMode;
+		ProfileService?.ToggleDarkMode();
+	}
+}
