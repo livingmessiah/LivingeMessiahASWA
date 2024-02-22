@@ -5,7 +5,7 @@
 		.OrderBy(o => o.Sort))
 {
 	<a href="@item.Index" title="@item.Title"
-		 type="button" class="@cssClass">
+		 type="button" class="@CssClass">
 		<i class="@item.Icon"></i>
 		@item.Title
 	</a>
@@ -13,21 +13,5 @@
 }
 
 @code {
-	[Parameter] public string? ButtonColor { get; set; }
-	[Parameter] public string? ButtonSize { get; set; }
-	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
-
-	protected string? cssClass;
-
-	protected override void OnInitialized()
-	{
-		if (MediaQuery == MediaQuery.Sm)
-		{
-			cssClass = $"btn {ButtonColor ?? Anchors.BtnColors.Secondary} {ButtonSize ?? Anchors.BtnSize.Sm}";
-		}
-		else
-		{
-			cssClass = $"btn {ButtonColor ?? Anchors.BtnColors.Secondary} {ButtonSize ?? Anchors.BtnSize.Lg}";
-		}
-	}
+	[Parameter, EditorRequired] public string? CssClass { get; set; }
 }

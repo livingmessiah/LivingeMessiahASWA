@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Client;
 using Blazored.LocalStorage;
 using Blazored.Toast;
+using Client.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -15,7 +16,24 @@ builder.Services.AddScoped(sp => new HttpClient
 		?? builder.HostEnvironment.BaseAddress)
 });
 
-builder.Services.AddBlazoredLocalStorage();
-//	builder.Services.AddSingleton<StateContainer>(); // gotten from repos\the-urlist\BlazorSWA\Client\Program.cs
+/*
+ builder.Services.AddSingleton<StateContainer>();
+ - gotten from repos\the-urlist\BlazorSWA\Client\Program.cs
+*/
+
+
+builder.Services.AddScoped<ProfileService>();
+/*
+ builder.Services.AddSingleton<StateContainer>();
+ - gotten from repos\the-urlist\BlazorSWA\Client\Program.cs
+ - I'm guessing eventually I'll use `AppState.cs` (Client/State/)
+*/
+
+
+builder.Services.AddBlazoredLocalStorageAsSingleton();
+/*
+ - gotten from samples/BlazorWebAssembly.Project.cs 
+ - was builder.Services.AddBlazoredLocalStorage();
+*/
 
 await builder.Build().RunAsync();
