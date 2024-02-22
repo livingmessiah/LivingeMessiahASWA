@@ -2,19 +2,20 @@
 @using Client.Services
 
 @inject ProfileService ProfileService
+@inject IToastService? Toast
 
 @if (IsDarkMode)
 {
 	<button class="btn btn-sm @Anchors.BtnColors.Dark" 
 		@onclick="Toggle" title="Change Dark Mode to Off">
-		DM is On <i class="fas fa-toggle-on"></i>
+		<i class="fas fa-toggle-on"></i>
 	</button>
 }
 else
 {
-	<button class="btn btn-sm @Anchors.BtnColors.Light" 
+	<button class="btn btn-sm @Anchors.BtnColors.Secondary" 
 		@onclick="Toggle" title="Change Dark Mode to On">
-		DM is Off <i class="fas fa-toggle-off"></i>
+		<i class="fas fa-toggle-off"></i>
 	</button>
 }
 
@@ -31,6 +32,7 @@ else
 	private void Toggle()
 	{
 		IsDarkMode = !IsDarkMode;
+		Toast!.ShowInfo($"...just called {nameof(ThemeToggle)}, IsDarkMode: {IsDarkMode}");
 		ProfileService?.ToggleDarkMode();
 	}
 }

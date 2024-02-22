@@ -8,7 +8,7 @@
 @implements IDisposable
 
 <div class="@MediaQuery.Xs.DivClass">
-	<TopRowSection MediaQuery="@MediaQuery.Xs"/>
+	<TopRowSection MediaQuery="@MediaQuery.Xs" />
 </div>
 <div class="@MediaQuery.Sm.DivClass">
 	<TopRowSection MediaQuery="@MediaQuery.Sm" />
@@ -29,8 +29,10 @@
 	</div>
 </div>
 
+
 <div class="container-fluid">
 	@Body
+	<BlazoredToasts />
 </div>
 
 <Footer />

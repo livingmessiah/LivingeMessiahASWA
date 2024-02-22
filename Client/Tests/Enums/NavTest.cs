@@ -1,4 +1,5 @@
 ﻿using Ardalis.SmartEnum;
+using Microsoft.Extensions.Logging;
 
 namespace Client.Tests.Enums;
 
@@ -20,6 +21,7 @@ public abstract class NavTest : SmartEnum<NavTest>
 		internal const int Shavuot = 59;                                    // fab fa-creative-commons-zero
 		internal const int Roles = 60;                                      // fas fa-ruler  Index = "/RolesTest";   Title = "Roles Test";
 		internal const int HealThySelf = 61;                            // fas fa-heartbeat   Title = "Heal Thy Self!";
+		internal const int LoggerAndToast = 62;
 	}
 	#endregion
 
@@ -27,6 +29,7 @@ public abstract class NavTest : SmartEnum<NavTest>
 
 	public static readonly NavTest Parent = new ParentSE();
 	public static readonly NavTest LocalStorage = new LocalStorageSE();
+	public static readonly NavTest LoggerAndToast = new LoggerAndToastSE();
 
 	#endregion
 
@@ -52,7 +55,6 @@ public abstract class NavTest : SmartEnum<NavTest>
 		public override int Sort => Id.Parent;
 	}
 
-
 	private sealed class LocalStorageSE : NavTest
 	{
 		public LocalStorageSE() : base($"{nameof(Id.LocalStorage)}", Id.LocalStorage) { }
@@ -60,6 +62,15 @@ public abstract class NavTest : SmartEnum<NavTest>
 		public override string Title => "Test Blazored LocalStorage (sync)";
 		public override string Icon => "fas fa-box-open";
 		public override int Sort => Id.LocalStorage;
+	}
+
+	private sealed class LoggerAndToastSE : NavTest
+	{
+		public LoggerAndToastSE() : base($"{nameof(Id.LoggerAndToast)}", Id.LoggerAndToast) { }
+		public override string Index => "/Test/LoggerAndToast";
+		public override string Title => "Test Logger and Toast";
+		public override string Icon => "fas fa-hard-hat";  
+		public override int Sort => Id.LoggerAndToast;
 	}
 
 
