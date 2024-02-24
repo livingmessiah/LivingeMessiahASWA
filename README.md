@@ -25,6 +25,8 @@
 
 ### Using a Bootstrap Modal for the user to select which third party Login to use
 
+### Added Logging
+
 ## Tools
 - [Static Web Apps CLI](https://azure.github.io/static-web-apps-cli/)
 - Azure Function Core Tools
