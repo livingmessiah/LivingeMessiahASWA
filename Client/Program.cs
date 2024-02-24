@@ -36,8 +36,12 @@ builder.Services.AddBlazoredLocalStorageAsSingleton();
  - was builder.Services.AddBlazoredLocalStorage();
 */
 
-var host = builder.Build(); // Added Logger which means I need the `host` variable
+var host = builder.Build(); // To add Logger, I need the `host` variable
+
 var logger = host.Services.GetRequiredService<ILoggerFactory>().CreateLogger<Program>();
 builder.Logging.SetMinimumLevel(LogLevel.Warning);
-logger.LogWarning("Inside Client!Program, right before host.RunAsync()");
-await host.RunAsync(); //await builder.Build().RunAsync();
+
+logger.LogWarning("Inside {project}!{class}, right before host.RunAsync(); API_Prefix: {apiPrefix}"
+, nameof(Client), nameof(Program), (string?)(builder.Configuration["API_Prefix"] ?? "???"));
+
+await host.RunAsync(); //was: await builder.Build().RunAsync();

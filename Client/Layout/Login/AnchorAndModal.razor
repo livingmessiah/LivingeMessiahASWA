@@ -4,10 +4,9 @@
 @if (ModalIsNotShownToggle)
 {
 	<button type="button" class="btn btn-xs btn-outline-info text-black-50"
-					@onclick="() => ShowModal()">
-		<i class="@Client.Enums.NavAccount.Login.Icon"></i> Login
+					@onclick="ShowModal">
+		<i class="@Client.Enums.NavAccount.Login.Icon!"></i> Login
 	</button>
-
 }
 else
 {
@@ -16,7 +15,7 @@ else
 			<div class="modal-content">
 				<div class="modal-header bg-light">
 
-					<h5 class="modal-title">Sign in to <b>@Meta.Title</b> with...</h5>
+					<h5 class="modal-title">Sign in to <b>@Meta.Title!</b> with...</h5>
 
 					<button type="button" class="close" @onclick="CloseModal">
 						<span>&times;</span>
@@ -27,9 +26,9 @@ else
 					<div class="d-flex justify-content-between">
 						@foreach (var item in ThirdPartyLogin.List.OrderBy(o => o.Value))
 						{
-							<a id="@item.Name" href="@($"{item.Href}?post_login_redirect_uri={currentUrl!}")"
-								 class="@item.ButtonCss @buttonSize text-white" title="@($"{item.Href}?post_login_redirect_uri={currentUrl!}")">
-								<i class="@item.Icon @fontSize" aria-hidden="true">&nbsp;@item.Title</i>
+							<a id="@item.Name!" href="@($"{item.Href}?post_login_redirect_uri={currentUrl!}")"
+								 class="@item.ButtonCss @buttonSize! text-white" title="@($"{item.Href!}?post_login_redirect_uri={currentUrl!}")">
+								<i class="@item.Icon @fontSize!" aria-hidden="true">&nbsp;@item.Title!</i>
 							</a>
 						}
 					</div>
@@ -45,30 +44,3 @@ else
 	</div>
 }
 
-
-@code {
-
-	const string? fontSize = ""; //"fa-fw fa-2x";
-	const string? buttonSize = "btn-xs"; // ToDo: use this... Client.Layout.Navigation.Anchors.BtnSize.Xs;
-	private string? currentUrl;
-
-	bool modalOpen = false;
-	string? modalClass = "modal";
-	bool ModalIsNotShownToggle = true;
-
-	void ShowModal()
-	{
-		currentUrl = NavigationManager!.Uri;
-		modalOpen = true;
-		ModalIsNotShownToggle = false;
-		modalClass += " show";
-		StateHasChanged();
-	}
-
-	void CloseModal()
-	{
-		modalOpen = false;
-		ModalIsNotShownToggle = true;
-		modalClass = "modal";
-	}
-}

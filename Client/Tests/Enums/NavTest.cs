@@ -1,5 +1,4 @@
 ﻿using Ardalis.SmartEnum;
-using Microsoft.Extensions.Logging;
 
 namespace Client.Tests.Enums;
 

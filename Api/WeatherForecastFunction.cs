@@ -16,7 +16,7 @@ public class WeatherForecastFunction
 	}
 
 	[Function("WeatherForecast")]
-	public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req)
+	public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData request)
 	{
 		_logger.LogInformation("C# HTTP trigger function processed a request.");
 
@@ -31,14 +31,14 @@ public class WeatherForecastFunction
 				TemperatureC = temp = randomNumber.Next(-20, 55),
 			});
 
-			var response = req.CreateResponse(HttpStatusCode.OK);
+			var response = request.CreateResponse(HttpStatusCode.OK);
 			response.WriteAsJsonAsync(result);
 			return response;
 		}
 		catch (Exception ex)
 		{
 			_logger.LogError($"Error: {ex.Message}");
-			var response = req.CreateResponse(HttpStatusCode.ExpectationFailed);
+			var response = request.CreateResponse(HttpStatusCode.ExpectationFailed);
 			return response;
 		}
 
