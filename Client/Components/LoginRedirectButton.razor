@@ -1,5 +1,5 @@
 ﻿@using Client.Enums
-@inject NavigationManager? NavigationManager
+
 
 @* <NotAuthorized> *@
 
@@ -10,7 +10,7 @@
 		
 	@* <LoginRedirectButton ReturnUrl!="@Page.Dashboard.Index" /> *@
 
-		<button @onclick="@(() => RedirectToLoginClick())"
+		<button @onclick="@RedirectToLoginClick"
 						type="button" class="btn-primary btn-sm">
 			Login <i class='fas fa-sign-in-alt'></i>
 		</button>
@@ -20,12 +20,4 @@
 
 @* </NotAuthorized> *@
 
-@code {
-	[Parameter, EditorRequired] public string? ReturnUrl { get; set; }
-	[Parameter, EditorRequired] public string? PageTitleToView { get; set; }
 
-	void RedirectToLoginClick()
-	{
-		NavigationManager!.NavigateTo($"{NavAccount.Login}?returnUrl={ReturnUrl!}", true);
-	}
-}

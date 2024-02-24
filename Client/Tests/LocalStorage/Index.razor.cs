@@ -3,10 +3,10 @@ namespace Client.Tests.LocalStorage;
 public partial class Index
 {
 
-  string NameFromLocalStorage { get; set; }
-  string StringFromLocalStorage { get; set; }
+  string? NameFromLocalStorage { get; set; }
+  string? StringFromLocalStorage { get; set; }
   int ItemsInLocalStorage { get; set; }
-  string Name { get; set; }
+  string? Name { get; set; }
   bool ItemExist { get; set; }
 
   protected override void OnInitialized()
