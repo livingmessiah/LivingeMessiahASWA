@@ -1,10 +1,17 @@
 ﻿@using Client.Layout.Navigation
-@using Client.Layout.Login
 @using Client.Enums
+@using Client.State
 @using Client.Services
+@using Client.Layout.SecondRowSection
+@using Shared
 
 @inherits LayoutComponentBase
-@inject ProfileService ProfileService
+
+@inject StateContainer StateContainer
+@inject HttpClient Http
+@inject ILogger<MainLayout> Logger
+@inject IToastService? Toast
+@inject MessageService MessageService
 @implements IDisposable
 
 <div class="@MediaQuery.Xs.DivClass">
@@ -18,43 +25,104 @@
 </div>
 
 <div class="d-flex justify-content-end mt-1 mx-1">
-	<div class="p-1">
-		<ThemeToggle DarkMode="@_preferences.DarkMode" />
-	</div>
+	@if (loggedIn)
+	{
+		<div class="p-2">
+			<LoggedInUserAnchor BlueCheck="@BlueCheck" Name="@UserName" Role="@Role" IsAdmin="@IsAdmin" />
+			<NotificationButton InitialNotifications="_messages.Notifications" />
+			<LogoutButton />
+		</div>
 
-	<ProfileButton />
-
-	<div class="p-2 fs-6">
-		<AnchorAndModal />
-	</div>
+		@if (_messages.Notifications > 0)
+		{
+			<div class="p-2">
+				<NotificationButton InitialNotifications="_messages.Notifications" />
+			</div>
+		}
+	}
+	else
+	{
+		<div class="p-2 fs-6">
+			<AnchorAndModal />
+		</div>
+	}
 </div>
 
 
 <div class="container-fluid">
 	@Body
-	<BlazoredToasts />
+	<BlazoredToasts Position="Blazored.Toast.Configuration.ToastPosition.TopLeft" />
 </div>
 
 <Footer />
 
 @code {
-	private Preferences _preferences = new();
+	private bool loggedIn = false;
+	//protected int Notifications;
+
+	private string? UserName { get; set; }
+	private string? BlueCheck { get; set; }
+	private bool IsAdmin { get; set; } = false;
+	private string? Role { get; set; }
+
+	private Messages _messages = new();
 
 	protected override async Task OnInitializedAsync()
 	{
-		ProfileService.OnChange += ProfileServiceOnOnChange;
-		_preferences = await ProfileService.GetPreferences();
+		Logger!.LogInformation("Inside {Class}!{Method}", nameof(MainLayout), nameof(OnInitializedAsync));
+		// ToDo: If not already logged in call  GetClientPrincipalAsync
+		await GetClientPrincipalAsync();
+
+		MessageService.OnChange += MessageServiceOnChange;
+		_messages = await MessageService.GetMessages();
 	}
 
-	private void ProfileServiceOnOnChange(Preferences newPreferences)
+	private void MessageServiceOnChange(Messages newMessages)
 	{
-		_preferences = newPreferences;
+		_messages = newMessages;
 		StateHasChanged();
 	}
 
 	public void Dispose()
 	{
-		ProfileService.OnChange -= ProfileServiceOnOnChange;
+		MessageService.OnChange -= MessageServiceOnChange;
 	}
+
+	private async Task GetClientPrincipalAsync()
+	{
+		Logger!.LogInformation("...Inside {Method}", nameof(GetClientPrincipalAsync));
+		try
+		{
+			var result = await Http!.GetFromJsonAsync<ClientPrincipalWrapper>(".auth/me");
+
+			if (result?.ClientPrincipal == null)  //not logged in
+			{
+				loggedIn = false;
+				Logger!.LogInformation("...not logged in");
+				return;
+			}
+			loggedIn = true;
+			UserName = result.ClientPrincipal!.UserDetails;
+			Logger!.LogInformation("...Name: {UserName}", UserName);
+
+			StateContainer.User = new User(result.ClientPrincipal);
+
+			BlueCheck = StateContainer.User.BlueCheck;
+			IsAdmin = StateContainer.User.IsAdmin;
+			Role = StateContainer.User.Roles;
+
+			Toast!.ShowSuccess($"{UserName} is logged in!");
+
+
+			StateHasChanged();
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "...Exception thrown");
+			Toast!.ShowError("...Exception thrown, see the Console in your Browsers Developer Tools");
+		}
+
+	}
+
 
 }

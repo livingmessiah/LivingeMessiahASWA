@@ -6,8 +6,6 @@ namespace Client.Enums;
 public abstract class NavSocialMedia : SmartEnum<NavSocialMedia>
 {
 
-
-
 	#region Id's
 	private static class Id
 	{
@@ -64,3 +62,4 @@ public abstract class NavSocialMedia : SmartEnum<NavSocialMedia>
 	#endregion
 
 }
+// Ignore Spelling: Nav 

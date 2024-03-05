@@ -1,0 +1,51 @@
+﻿@page "/Profile"
+<PageHeader PageEnum="Client.Enums.Nav.Profile" />
+
+@using Client.Services
+@inject ProfileService ProfileService
+@implements IDisposable
+
+
+<p>If Logged in, Implement something like <code>Claims</code> </p>
+<p>If Logged in, Implement something like <code>LoginRedirectButton</code> </p>
+
+<div class="p-1">
+	<ThemeToggle DarkMode="@_preferences.DarkMode" />
+</div>
+
+
+@* 
+<AuthorizeView>
+	<Authorized>
+		
+		<p>ToDo: Implement <code><Claims /></code> </p>
+	</Authorized>
+
+	<NotAuthorized>
+		<p>ToDo: Implement <code>LoginRedirectButton</code> </p>
+	</NotAuthorized>
+</AuthorizeView>
+*@
+
+@code {
+	//<LoginRedirectButton ReturnUrl="@Page.Index" />
+
+	private Preferences _preferences = new();
+	protected override async Task OnInitializedAsync()
+	{
+		ProfileService.OnChange += ProfileServiceOnOnChange;
+		_preferences = await ProfileService.GetPreferences();
+	}
+
+	private void ProfileServiceOnOnChange(Preferences newPreferences)
+	{
+		_preferences = newPreferences;
+		StateHasChanged();
+	}
+
+	public void Dispose()
+	{
+		ProfileService.OnChange -= ProfileServiceOnOnChange;
+	}
+
+}

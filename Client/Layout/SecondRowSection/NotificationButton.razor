@@ -1,0 +1,24 @@
+﻿@using Client.Enums
+
+@inject NavigationManager? NavigationManager 
+
+@if (InitialNotifications > 0)
+{
+	<button class="btn btn-primary btn-xs position-relative p-1 mt-1"
+					type="button" title="@Nav.Notifications.Title" @onclick="ButtonClicked">
+		<i class="@Nav.Notifications.Icon"></i>
+		<span class="position-absolute top-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+			@InitialNotifications
+			<span class="visually-hidden">Notification Count</span>
+		</span>
+	</button>
+}
+
+@code {
+	[Parameter] public int InitialNotifications { get; set; }
+
+	private void ButtonClicked()
+	{
+		NavigationManager!.NavigateTo(Nav.Notifications.Index);
+	}
+}

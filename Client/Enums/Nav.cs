@@ -64,10 +64,12 @@ public abstract class Nav : SmartEnum<Nav>
 
 		internal const int PsalmsAndProverbs = 45;   //fab fa-readme Title = "Upcoming Psalms And Proverbs"; Index2 = "/PandP";
 		internal const int Psalms = 46;   //fab fa-readme   //Title = "Psalms";
+		internal const int Profile = 47;
+		internal const int Notifications = 48;
+		internal const int LoggedOut = 49;
 
-    
 
-    /*
+		/*
 public static class ThankYou
 {
 	public const string TopId = "ThankYouTop";
@@ -77,8 +79,8 @@ public static class ThankYou
 }
 		*/
 
-    // Remove?
-    internal const int FeastTable = 50;   //fas fa-glass-cheers
+		// Remove?
+		internal const int FeastTable = 50;   //fas fa-glass-cheers
 		internal const int FeastSfSchedule = 51;   //far fa-calendar
 		internal const int BibleBooks = 52;   // fas fa-tachometer-alt Title="Bible Books"
 		internal const int BibleCascadingDDL = 53;   // fas fa-tachometer-alt Title="Bible Cascading Dropdown List"
@@ -127,8 +129,11 @@ public static class ThankYou
 	public static readonly Nav Community = new CommunitySE();
 	public static readonly Nav Gallery = new GallerySE();
 
+	public static readonly Nav Profile = new ProfileSE();
+	public static readonly Nav Notifications = new NotificationsSE();
+	public static readonly Nav LoggedOut = new LoggedOutSE();
 
-  public static readonly Nav TestLocalStorage = new TestLocalStorageSE();
+	public static readonly Nav TestLocalStorage = new TestLocalStorageSE();
 
   #endregion
 
@@ -534,7 +539,42 @@ public static class ThankYou
 	}
 
 
-  private sealed class TestLocalStorageSE : Nav
+	private sealed class ProfileSE : Nav
+	{
+		public ProfileSE() : base($"{nameof(Id.Profile)}", Id.Profile) { }
+		public override string Index => "/profile";
+		public override string Title => "Profile";
+		public override string Icon => "fas fa-user";  //fab fa-superpowers
+		public override int Sort => Id.Profile;
+		public override PageListType PageListType => PageListType.SitemapPage;
+		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+	}
+
+	private sealed class NotificationsSE : Nav
+	{
+		public NotificationsSE() : base($"{nameof(Id.Notifications)}", Id.Notifications) { }
+		public override string Index => "/Notifications";
+		public override string Title => "Notifications";
+		public override string Icon => "far fa-envelope";
+		public override int Sort => Id.Notifications;
+		public override PageListType PageListType => PageListType.SitemapPage;
+		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+	}
+
+	private sealed class LoggedOutSE : Nav
+	{
+		public LoggedOutSE() : base($"{nameof(Id.LoggedOut)}", Id.LoggedOut) { }
+		public override string Index => "/loggedout";
+		public override string Title => "Logged Out";
+		public override string Icon => "fas fa-sign-out-alt";
+		public override int Sort => Id.LoggedOut;
+		public override PageListType PageListType => PageListType.None;
+		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+	}
+
+
+
+	private sealed class TestLocalStorageSE : Nav
   {
     public TestLocalStorageSE() : base($"{nameof(Id.TestLocalStorage)}", Id.TestLocalStorage) { }
     public override string Index => "/TestLocalStorage";
@@ -549,4 +589,4 @@ public static class ThankYou
   #endregion
 }
 
-// Ignore Spelling: Nav Permaculture Indepth Mishpocha Parasha Chala Challah Syncfusion QRC Descr tshirt Torah pesach YouTube
+// Ignore Spelling: Nav Permaculture Indepth Mishpocha Parasha Chala Challah Syncfusion QRC Descr tshirt Torah pesach YouTube loggedout Blazored

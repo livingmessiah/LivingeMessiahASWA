@@ -1,0 +1,59 @@
+﻿@page "/Notifications"
+<PageHeader PageEnum="Client.Enums.Nav.Notifications" />
+@using Client.Enums
+@using Client.Services
+
+@inject ILogger<Notifications> Logger
+@inject MessageService MessageService
+@implements IDisposable
+
+<p>ToDo</p>
+
+<button class="btn btn-primary btn-xs position-relative p-1 mt-1"
+				type="button" title="@Nav.Notifications.Title"
+				@onclick="OnButtonClicked">
+	<i class="@Nav.Notifications.Icon"></i>
+	<span class="position-absolute top-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+		@_messages.Notifications
+		<span class="visually-hidden">Notification Count</span>
+	</span>
+</button>
+
+<br />
+<a @onclick="OnAddClicked" title="call OnAddClicked">➕	</a>
+
+@code {
+
+	private Messages _messages = new();
+	protected override async Task OnInitializedAsync()
+	{
+		Logger!.LogInformation("Inside {Class}!{Method}", nameof(Notifications), nameof(OnInitializedAsync));
+		MessageService.OnChange += MessageServiceOnChange;
+		_messages = await MessageService.GetMessages();
+	}
+	private void MessageServiceOnChange(Messages newMessages)
+	{
+		_messages = newMessages;
+		StateHasChanged();
+	}
+
+	public void Dispose()
+	{
+		MessageService.OnChange -= MessageServiceOnChange;
+	}
+
+	private async Task OnButtonClicked()
+	{
+		await MessageService.DecrementNotifications();
+		StateHasChanged();
+	}
+
+	private async Task OnAddClicked()  //int count
+	{
+		await MessageService.IncrementNotifications();
+		StateHasChanged();
+	}
+
+
+
+}

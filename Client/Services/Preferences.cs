@@ -2,7 +2,6 @@
 
 public record Preferences
 {
-	public string? FullName { get; set; }
+	public string? FullName { get; set; } // No references 
 	public bool DarkMode { get; init; }
-	public int Notifications { get; set; }
 }

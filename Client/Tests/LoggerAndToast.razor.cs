@@ -20,8 +20,7 @@ public partial class LoggerAndToast
 
 	void ThrowExceptionButtonClick()
 	{
-		//Logger!.LogDebug(string.Format("Inside {0}", nameof(LoggerAndToast) + "!" + nameof(ThrowExceptionButtonClick)));
-		Logger!.LogWarning(string.Format("Inside {0}", $"{nameof(LoggerAndToast)}!{nameof(ThrowExceptionButtonClick)}"));
+		Logger!.LogInformation("Inside {Class}!{Method}", nameof(LoggerAndToast), nameof(ThrowExceptionButtonClick));
 		try
 		{
 			for (int i = 0; i < 10; i++)

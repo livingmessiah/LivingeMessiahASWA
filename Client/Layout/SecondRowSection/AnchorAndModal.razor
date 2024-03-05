@@ -1,0 +1,101 @@
+﻿@using Client.Layout.Enums
+@using Client.Layout.SecondRowSection
+
+@inject NavigationManager? NavigationManager
+
+@if (ModalIsNotShownToggle)
+{
+	<button type="button" class="@LogUiConstants.Login.ButtonCSS"
+					@onclick="ShowModal">
+		<i class="@LogUiConstants.Login.Icon"></i> <u>@LogUiConstants.Login.Title</u>
+	</button>
+
+}
+else
+{
+	<div class="@modalClass!" style="display:@(modalOpen?"block":"none");">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header bg-light">
+
+					<h5 class="modal-title">Sign in to <b>@Meta.Title!</b> with...</h5>
+
+					<button type="button" class="close" @onclick="CloseModal">
+						<span>&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+
+					<div class="container-fluid">
+
+						<div class="row">
+							<div class="col-12">
+								<div class="hstack gap-2 mb-2">
+									@foreach (var item in ThirdPartyLogin.List.Where(w => w.Value <= 2).OrderBy(o => o.Value))
+									{
+										<a id="@item.Name!" href="@($"{item.Href}?post_login_redirect_uri={currentUrl!}")"
+											 class="@item.ButtonCss @buttonSize! text-white" title="@($"{item.Href!}?post_login_redirect_uri={currentUrl!}")">
+											<i class="@item.Icon @fontSize!" aria-hidden="true">&nbsp;@item.Title!</i>
+										</a>
+									}
+								</div>
+							</div>
+						</div> <!--1st row-->
+
+						<div class="row">
+							<div class="col-12">
+								<div class="hstack gap-2 mb-2">
+									@foreach (var item in ThirdPartyLogin.List.Where(w => w.Value > 2).OrderBy(o => o.Value))
+									{
+										<a id="@item.Name!" href="@($"{item.Href}?post_login_redirect_uri={currentUrl!}")"
+											 class="@item.ButtonCss @buttonSize! text-white" title="@($"{item.Href!}?post_login_redirect_uri={currentUrl!}")">
+											<i class="@item.Icon @fontSize!" aria-hidden="true">&nbsp;@item.Title!</i>
+										</a>
+									}
+								</div>
+							</div>
+						</div> <!--2nd row-->
+
+					</div> <!--container-fluid-->
+				</div> <!--modal-body-->
+
+				<div class="modal-footer bg-light">
+					<button type="button" class="btn btn-primary" @onclick="CloseModal">
+						Cancel
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+@code {
+#pragma warning disable CS8669
+
+	const string? fontSize = "";
+	const string? buttonSize = "btn-xs"; // ToDo: use this... Client.Layout.Navigation.Anchors.BtnSize.Xs;
+	private string? currentUrl;
+
+	bool modalOpen = false;
+	string? modalClass = "modal";
+	bool ModalIsNotShownToggle = true;
+
+	protected void ShowModal()
+	{
+		currentUrl = NavigationManager!.Uri;
+		modalOpen = true;
+		ModalIsNotShownToggle = false;
+		modalClass += " show";
+		StateHasChanged();
+	}
+
+	protected void CloseModal()
+	{
+		modalOpen = false;
+		ModalIsNotShownToggle = true;
+		modalClass = "modal";
+	}
+#pragma warning restore CS8669
+
+}
+

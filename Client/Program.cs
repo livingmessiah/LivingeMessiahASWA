@@ -4,6 +4,7 @@ using Client;
 using Blazored.LocalStorage;
 using Blazored.Toast;
 using Client.Services;
+using Client.State;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -23,8 +24,10 @@ builder.Services.AddScoped(sp => new HttpClient
 
 
 builder.Services.AddScoped<ProfileService>();
+builder.Services.AddScoped<MessageService>();
+
+builder.Services.AddSingleton<StateContainer>();
 /*
- builder.Services.AddSingleton<StateContainer>();
  - gotten from repos\the-urlist\BlazorSWA\Client\Program.cs
  - I'm guessing eventually I'll use `AppState.cs` (Client/State/)
 */
@@ -41,7 +44,7 @@ var host = builder.Build(); // To add Logger, I need the `host` variable
 var logger = host.Services.GetRequiredService<ILoggerFactory>().CreateLogger<Program>();
 builder.Logging.SetMinimumLevel(LogLevel.Warning);
 
-logger.LogWarning("Inside {project}!{class}, right before host.RunAsync(); API_Prefix: {apiPrefix}"
+logger.LogInformation("Inside {project}!{class}, right before host.RunAsync(); API_Prefix: {apiPrefix}"
 , nameof(Client), nameof(Program), (string?)(builder.Configuration["API_Prefix"] ?? "???"));
 
 await host.RunAsync(); //was: await builder.Build().RunAsync();

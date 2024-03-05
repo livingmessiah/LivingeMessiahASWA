@@ -108,3 +108,72 @@ a, .btn-link {
 code {
     color: #c02d76;
 }
+
+
+hr.warning {
+  border-bottom: 3px solid #ece1c1;
+}
+
+.hebrew16 {
+  font-size: 16.0pt;
+  font-family: david;
+  direction: rtl;
+}
+
+.hebrew {
+  font-size: 22.0pt;
+  font-family: david;
+  direction: rtl;
+}
+
+
+.hebrew30 {
+  font-size: 30.0pt;
+  font-family: david;
+  direction: rtl;
+  margin-top: .2em;
+}
+
+.hebrew36 {
+  font-size: 36.0pt;
+  font-family: david;
+  direction: rtl;
+  margin-top: .2em;
+}
+
+.hebrew44 {
+  font-size: 44.0pt;
+  font-family: david;
+  direction: rtl;
+}
+
+.hebrew62 {
+  font-size: 62.0pt;
+  font-family: david;
+  direction: rtl;
+}
+
+.hebrew.tiny {
+  font-size: 10.0pt;
+}
+
+.hebrew.xs {
+  font-size: 10.0pt;
+}
+
+.hebrew.sm {
+  font-size: 16.0pt;
+}
+
+.hebrew.md {
+  font-size: 22.0pt;
+}
+
+.hebrew.lg {
+  font-size: 30.0pt;
+}
+
+.hebrew.xl {
+  font-size: 36.0pt;
+}
+

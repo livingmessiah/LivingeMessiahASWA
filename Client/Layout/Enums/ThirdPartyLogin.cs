@@ -1,5 +1,5 @@
 ﻿using Ardalis.SmartEnum;
-namespace Client.Layout.Login.Enums;
+namespace Client.Layout.Enums;
 
 public abstract class ThirdPartyLogin : SmartEnum<ThirdPartyLogin>
 {
