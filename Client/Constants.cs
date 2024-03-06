@@ -25,7 +25,8 @@ public static class LocationMap
 
 public static class BaseUrl
 {
-	public const string AzureAssignedUrl = $"https://blue-mushroom-0e370fb1e.4.azurestaticapps.net/";
-	public const string CustomUrl = $"https://LivingMessiah.org/";
+	public const string AzureAssignedUrl = $"https://blue-mushroom-0e370fb1e.4.azurestaticapps.net";
+	public const string CustomUrl = $"https://LivingMessiah.org";
+	public const string ProductionUrl = $"https://LivingMessiah.com";
 }
 

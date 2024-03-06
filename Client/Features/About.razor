@@ -1,8 +1,47 @@
 ﻿@page "/About"
 <PageHeader PageEnum="Client.Enums.Nav.About" />
 
+<HeadContent>
+	<link rel="canonical" href="@canonical" />
+	<meta name="keywords" content="@Keywords" />
+	<meta name="description" content="@Description" />
+	<meta name="author" content="@Author">
+	<meta name="robots" content="index, follow">
+	<meta name="theme-color" content="#ffffff">
+
+	<meta property="og:title" content="@Meta.Title" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="@BaseUrl.ProductionUrl" />
+	<meta property="og:image" prefix="" content="@TwitterImage" />
+	<meta name="og:image:alt" content="@TwitterImageAlt" />
+	<meta property="og:description" content="@Description" />
+
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@TwitterSite" />
+	<meta name="twitter:title" content="@canonical" />
+	<meta name="twitter:description" content="@Description" />
+	<meta name="twitter:image" content="@TwitterImage" />
+	<meta name="twitter:image:alt" content="@TwitterImageAlt" />
+	<meta name="twitter:url" content="@BaseUrl.ProductionUrl" />
+</HeadContent>
+
 <p>ToDo</p>
 
 @code {
 
+	private string canonical = $"{BaseUrl.ProductionUrl}{Client.Enums.Nav.About.Index}"; //a canonical link element that identifies where the page should be served from
+	private const string Keywords = "Messianic, Congregation, Torah, Hebrew, Roots, Worship, Community, Shabbat, Mesa, Phoenix, AZ, Passover, Torah Observant Community, Church";
+	public const string Description = "Living Messiah Ministries Messianic Congregation meeting in Mesa, Arizona";
+	public const string Author = "Jerry Watkins, John Marsing";
+
+	public const string TwitterSite = "@LivingMessiah";
+	public const string TwitterAuthor = "@JohnMarsing";
+	public const string TwitterImage = "https://livingmessiahstorage.blob.core.windows.net:443/images/storefront1.jpg";
+	public const string TwitterImageAlt = "Store front of Living Messiah";
+
+	/*
+		- `<component type="typeof(LivingMessiah.Web.Shared.Meta)" render-mode="ServerPrerendered" />` from LivingMessiahBlazor (ver 7, BlazorServer)
+		- `@attribute [OutputCache(Duration = 600)]` from https://jeffreyfritz.com/2024/02/blazor-and-net-8-how-i-build-a-fast-and-flexible-website/#disqus_thread
+	*/
+	// Ignore Spelling: Marsing og url ffffff
 }
